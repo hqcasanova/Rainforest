@@ -1,17 +1,32 @@
 <%= form_for @product do |f| %>
+  <% errors = @product.errors.any?
+     if errors
+  %>
+    <h2 class="error">
+      <%= pluralize(@product.errors.count, "error") %> found:
+    </h2>
+    <ul class="error">
+      <% @product.errors.full_messages.each do |error_msg| %>
+        <li><%= error_msg %></li> 
+      <% end %> 
+    </ul>
+  <% end %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, :required => true %>
+    <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_area :description, :required => true %>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
     <%= f.label :price_in_cents %><br />
-    <%= f.number_field :price_in_cents %>
+    <%= f.text_field :price_in_cents %>
   </div>
   <div class="actions">
+    <% if errors %>
+      <p class="error">Please, make sure all fields are correct before submitting</p> 
+    <% end %>
     <%= f.submit %>
   </div>
 <% end %>
