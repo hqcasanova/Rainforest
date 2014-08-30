@@ -1,0 +1,5 @@
+<h1>Product details</h1>
+<%= link_to 'Edit', edit_product_path, title: "Change this product's details" %>
+<%= link_to 'Delete', product_path, title: "Delete this product", :'data-method' => 'delete' %>
+<%= render 'product', :product => @product %>
+<%= link_to 'Back', products_path, title: "Back to all products" %>
