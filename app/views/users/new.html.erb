@@ -1,0 +1,34 @@
+<h1>Sign up</h1>
+<%= form_for @user do |f| %>
+  <% errors = @user.errors.any?
+     if errors
+  %>
+    <h2 class="error">
+      <%= pluralize(@user.errors.count, "error") %> found:
+    </h2>
+    <ul class="error">
+      <% @user.errors.full_messages.each do |error_msg| %>
+        <li><%= error_msg %></li> 
+      <% end %> 
+    </ul>
+  <% end %>
+  <div class="field">
+    <%= f.label :email %><br/>
+    <%= f.email_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br/>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br/>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <% if errors %>
+      <p class="error">Please, make sure all fields are correct before submitting</p> 
+    <% end %>
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= link_to 'Cancel', request.referrer, title: 'Back to previous page' %>
