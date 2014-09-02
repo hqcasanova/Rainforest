@@ -8,6 +8,7 @@ Rails.application.routes.draw do
    get '/contact', to: 'pages#contact', as: :contact
    resources :products
    resources :users, only: [:new, :create]
+   resources :sessions, only: [:new, :create, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

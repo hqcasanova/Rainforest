@@ -17,6 +17,10 @@
     <%= f.email_field :email %>
   </div>
   <div class="field">
+    <%= f.label :username %><br/>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
     <%= f.label :password %><br/>
     <%= f.password_field :password %>
   </div>
@@ -31,4 +35,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-<%= link_to 'Cancel', request.referrer, title: 'Back to previous page' %>

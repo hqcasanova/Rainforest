@@ -1,14 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rainforest</title>
+  <title>
+    Rainforest: 
+    <% if request.path == root_path %>
+      Amazon, but better.
+    <% elsif request.path['edit'] || request.path['new'] %>
+      <%= "#{action_name.capitalize} #{controller_name.singularize}" %>
+    <% else %>
+      <%= "#{controller_name.singularize.capitalize} #{action_name}" %> 
+    <% end %>
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400italic,400,600italic,600,700italic,700,800italic,800" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<header>
+    <!-- Logo and link to home -->
+    <h1>
+      <%= link_to root_path do %>
+        <%= image_tag "rainforest.png", alt: "Rainforest logo" %>
+        Rainforest
+      <% end %>
+    </h1>
 
-<%= yield %>
+    <!-- Breadcrumbs and Login/Logout button -->
+    <% if controller_name != 'sessions'
+         path = ''
+         request.path[1..-1].split('/').each do |page| 
+           path = "#{path}/#{page}"
+    %>
+           <%= link_to page, path, title: "Go to #{page}", class: 'breadcrumb' %>
+      <% end %>
+        <%= link_to "Login", new_session_path, title: "Go to the login page", class: 'login' %>
+    <% end %>
+  </header>
+  <section>
+    <%= yield %> 
 
+    <!-- Cancel button for forms only -->
+    <% if (action_name['new'] || action_name['edit']) 
+         if (request.referrer != request.path)
+           url = request.referrer
+         elsif controller_name != 'sessions'
+           url = root_path + controller_name
+         else 
+           url = root_path  
+         end 
+    %>
+         <%= link_to 'Cancel', url, title: 'Back to previous page' %>
+    <% end %>
+  </section>
+  <footer>
+    Contact us directly: 
+    <address>
+      <a class="email" title="Email us" href="mailto:feedback@rainforest.com">feedback@rainforest.com</a>
+      <a class="phone" title="Call us" href="tel:+1128725674">+1 647 4985904</a>
+    </address>
+    Or fill our <a class="form" title="Go to the online contact page" href="<%= contact_path %>">online form</a>
+    <a rel="license" title="Human-readable summary of CC BY-NC-SA license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB" target="_blank">
+      <small property="dc:publisher">Hector Casanova</small>
+      <small property="dc:dateCopyrighted">2014</small>
+    </a>
+  </footer>
 </body>
 </html>
