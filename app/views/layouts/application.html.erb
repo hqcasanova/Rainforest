@@ -37,11 +37,19 @@
       <% end %>
         <%= link_to "Login", new_session_path, title: "Go to the login page", class: 'login' %>
     <% end %>
+
+    <!-- Notices and alerts -->
+    <% if flash[:notice] %>
+      <span class="notice"><%= flash[:notice] %></span>
+    <% end %>
+    <% if flash[:alert] %>
+      <span class="alert"><%= flash[:alert] %></span>
+    <% end %>
   </header>
   <section>
     <%= yield %> 
 
-    <!-- Cancel button for forms only -->
+    <!-- TODO: Cancel button for forms only -->
     <% if (action_name['new'] || action_name['edit']) 
          if (request.referrer != request.path)
            url = request.referrer
