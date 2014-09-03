@@ -1,10 +1,15 @@
 class ProductsController < ApplicationController
+  PRODUCT_ATTR = [:name, :description, :price_in_cents]
+  before_filter -> { load_product(:id) }, only: [:show, :edit, :update, :destroy]    #from application_controller  
+
   def index
     @products = Product.all
   end
 
   def show
-    @product = Product.find(params[:id])
+    if current_user
+      @review = @product.reviews.build
+    end
   end
 
   def new
@@ -12,35 +17,29 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def create
-    @product = Product.new(product_params)
+    @product = Product.new(secure_params(:product, PRODUCT_ATTR))
     if @product.save
-      redirect_to products_path
+      redirect_to products_path, notice: "Product created successfully"
     else
+      flash.now['alert'] = 'Failure when creating review'
       render :new
     end
   end
 
   def update
-    @product = Product.find(params[:id])
-    if @product.update_attributes(product_params)
-      redirect_to product_path
+    if @product.update_attributes(secure_params(:product, PRODUCT_ATTR))
+      redirect_to product_path, notice: "Product updated successfully"
     else
+      flash.now['alert'] = 'Failure when updating review'
       render :edit
     end
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
-    redirect_to products_path
-  end
-
-  private
-  def product_params
-    params.require(:product).permit(:name, :description, :price_in_cents)
+    redirect_to products_path, notice: "Product deleted"
   end
 end

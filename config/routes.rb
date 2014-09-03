@@ -6,9 +6,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'pages#index'
    get '/contact', to: 'pages#contact', as: :contact
-   resources :products
+   resources :products do 
+     resources :reviews, only: [:edit, :create, :update, :destroy]
+   end
    resources :users, only: [:new, :create]
    resources :sessions, only: [:new, :create, :destroy]
+   get '/products/:id/reviews', to: redirect('/products/:id/#reviews')
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

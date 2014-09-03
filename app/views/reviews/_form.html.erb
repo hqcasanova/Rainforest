@@ -1,0 +1,14 @@
+<!-- This way, active record can infer the value for the FK in Reviews --> 
+<%= form_for([@product, @review]) do |f| %>       
+  <%= render 'shared/form_header', :errors => @review.errors %>
+  <div class="field">
+    <%= f.label :comment %><br/>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="actions">
+    <% if @review.errors.any? %>
+      <p class="error">Please, make sure all fields are correct before submitting</p> 
+    <% end %>
+    <%= f.submit %>
+  </div>
+<% end %>
