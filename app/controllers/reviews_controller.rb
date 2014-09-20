@@ -10,11 +10,14 @@ class ReviewsController < ApplicationController
   def create
     @review = @product.reviews.build(secure_params(:review, REVIEW_ATTR))
     @review.user = current_user
-    if @review.save
-      redirect_to current_product, notice: 'Review created successfully'
-    else
-      flash.now['alert'] = 'Failure when creating review'
-      render 'products/show'
+    respond_to do |format|
+      if @review.save
+        format.html { redirect_to current_product, notice: 'Review created successfully' }
+        format.js {} #fetches app/views/reviews/create.js.erb
+      else
+        format.html { render 'products/show', alert: 'Failure when creating review' }
+        format.js {} #fetches app/views/reviews/create.js.erb
+      end
     end
   end
 

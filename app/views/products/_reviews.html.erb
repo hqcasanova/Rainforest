@@ -1,0 +1,11 @@
+<!-- Only list reviews if they are there! -->
+<%  num_reviews = @product.reviews.count
+    if num_reviews > 0 
+%>
+  <h2><span id="review-counter"><%= num_reviews %></span> Reviews</h2>
+  <%= render @product.reviews %>
+  <h3 class="review-form-title">New review</h3>
+<% else %>
+  <h2 class="review-form-title">New review</h2>
+  <p>Be the first to review this product!</p>
+<% end %>

@@ -1,2 +1,4 @@
-<h1>Amazon, but better</h1>
-<%= link_to "Products", products_path, title: 'List all available products' %>
+<%= link_to products_path, title: 'List all available products' do %>
+  <h1>amazon <span>[a]lternative</span></h1>
+  <p>Check out our products</p>
+<% end %>

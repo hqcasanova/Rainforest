@@ -3,7 +3,7 @@
   <% @products.each do |product| %>
     <li>
       <%= link_to product_path(product) do %>
-        <%= render 'product', :product => product %>
+        <%= render product %>
       <% end %>
     </li>
   <% end %>

@@ -1,0 +1,15 @@
+<% if @review.errors.present? %>
+  $("#review-form-errors").html("<%= escape_javascript(render 'shared/form_header', :errors => @review.errors) %>");
+<% else %>
+  $("#review-form-errors").html("");      //clear any previous errors
+  $reviewCounter = $("#review-counter");  //number in heading of review list
+  if ($reviewCounter.length) {            //if there's a counter, at least 1 review has already been added
+      $(".review-form-title").before("<%= escape_javascript(render @review) %>");    //h2 -> h3 for title of review form if at least 1 review exists
+      $reviewCounter.text(parseInt($reviewCounter.text(), 10) + 1);                  //increases review counter 
+  } else {
+      $("#review-list").html("<%= escape_javascript(render :partial => 'products/reviews') %>");
+  }
+  $(".recent").removeClass("recent");
+  $("#review-list p").slice(-2).addClass("recent");   //highlights newly added review
+  $("#new_review textarea").val("");                  //clear text area
+<% end %>

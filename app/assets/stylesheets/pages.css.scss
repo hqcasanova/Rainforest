@@ -1,3 +1,41 @@
-// Place all the styles related to the Pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+header {
+  z-index: 4;
+  position: relative;   //Makes z-index effective
+}
+section.cover {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+section.cover:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+}
+section a {
+  display: inline-block;
+  padding: .7em;
+  vertical-align: middle;
+  background-color: rgba(0,0,0,.5);
+  border-radius: 1em;
+}
+section a:hover {
+  text-decoration: none;
+  background-color: rgba(0,0,0,.8);
+}
+section a p:after {
+
+}
+section h1 {
+  font-size: 2.5em;
+  text-align: center;
+}
+section h1 span {
+  display: block;
+  margin: .5em 0;
+}
+section p {text-align: center}

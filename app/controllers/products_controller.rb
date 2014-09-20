@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to products_path, notice: "Product created successfully"
     else
-      flash.now['alert'] = 'Failure when creating review'
+      flash.now['alert'] = 'Failure when creating product'
       render :new
     end
   end
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
     if @product.update_attributes(secure_params(:product, PRODUCT_ATTR))
       redirect_to product_path, notice: "Product updated successfully"
     else
-      flash.now['alert'] = 'Failure when updating review'
+      flash.now['alert'] = 'Failure when updating product'
       render :edit
     end
   end
