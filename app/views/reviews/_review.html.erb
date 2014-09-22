@@ -1,11 +1,10 @@
-<% if current_user && review.id %>
-  <%= link_to 'Edit', edit_product_review_path(@product, review), title: "Change this review" %>
-  <%= link_to 'Delete', product_review_path(@product, review), title: "Delete this review", :'data-method' => 'delete' %>
-<% end %>
 <p><%= review.comment %></p>
 <% if review.user != nil %>
   <p>
-    Author: <em><%= review.user.username %></em>
-    Added on: <%= review.created_at %>
+    By <em><%= review.user.username %></em> on <%= formatted_datetime(review.created_at) %>
   </p>
+<% end %>
+<% if current_user && review.id %>
+  <%= link_to 'Edit', edit_product_review_path(@product, review), title: "Change this review" %>
+  <%= link_to 'Delete', product_review_path(@product, review), title: "Delete this review", :'data-method' => 'delete' %>
 <% end %>

@@ -1,0 +1,4 @@
+$(".placeholder").html("<%= j(render @products) %>");
+$('body').animate({
+    scrollTop: $(".placeholder").offset().top
+}, 1000);

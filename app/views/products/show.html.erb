@@ -1,9 +1,11 @@
-<h1>Product details</h1>
-<!-- Paths are absolute to avoid a missing :id error when recovering from an error in review form (from /products/:product_id/reviews). -->
+<h1><%= @product.name %></h1>
+<%= render @product, :wrap_in => :div %>
 <%= link_to 'Edit', edit_product_path(@product), title: "Change this product's details" %>
-<%= link_to 'Delete', product_path(@product), title: "Delete this product", :'data-method' => 'delete' %>
-<%= render @product %>
+<%= link_to 'Delete', product_path(@product), title: "Delete this product", :'data-method' => 'delete' %>  
 
+<% if false %>
+Note that paths are absolute to avoid a missing :id error when recovering from an error in review form (from /products/:product_id/reviews).
+<% end %>
 <div id="review-list">
   <%= render :partial => "products/reviews" %>
 </div>

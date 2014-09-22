@@ -1,5 +1,16 @@
-<dl>
-  <dt>Name: <%= product.name %></dt>
-  <dd>Description: <%= product.description %></dd>
-  <dd>Price in cents: <%= product.formatted_price %></dd>
-</dl>
+<% if false %>
+If wrapping tag argument passed, that one used instead of anchor and the product's name is hidden. Based on: http://stackoverflow.com/questions/6196297/render-collection-wrap-each-item
+<% end %>
+<% @rendered_content = capture do %>
+  <dl>
+    <%= content_tag(:dt, product.name) unless (defined?(wrap_in) && !wrap_in.blank?) %>
+    <dd class="price<%= ' inverted' if (defined?(wrap_in) && !wrap_in.blank?) %>"><%= product.formatted_price %></dd>
+    <dd><%= product.description %></dd>
+  </dl>
+<% end %>
+
+<% if defined?(wrap_in) && !wrap_in.blank? %>
+  <%= content_tag(wrap_in, @rendered_content, class: "product") %>
+<% else %>
+  <%= link_to @rendered_content, product_path(product), class: "product" %> 
+<% end %>

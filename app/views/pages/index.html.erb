@@ -1,4 +1,10 @@
-<%= link_to products_path, title: 'List all available products' do %>
-  <h1>amazon <span>[a]lternative</span></h1>
-  <p>Check out our products</p>
-<% end %>
+<div class="cover">
+  <div class="search-box predecessor">
+    <h1>amazon <span>[a]lternative</span></h1>
+    <%= form_tag products_path, method: :get, class: 'search-form' do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Name of product" %>
+      <%= submit_tag "Search", class: 'search-btn' %>
+    <% end %>
+  </div>
+</div>
+<%= javascript_include_tag 'products' %>

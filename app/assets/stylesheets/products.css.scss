@@ -1,0 +1,23 @@
+.price {
+  display: inline-block;
+  float: left;
+  margin: .5em .7em .5em 0;
+  padding: .2em .4em;
+  background-color: rgb(250,250,250);
+  color: black;
+  border-radius: 100%;
+}
+.price.inverted {
+  background-color: rgba(0,0,0,.7);
+  color: rgb(250,250,250); 
+}
+.price:after {
+  content: '\0000A2';
+  font-family: "Times New Roman", serif;
+} 
+.price ~ dd {overflow: hidden}
+.new_review label, .edit_review label {
+  display: none;
+} 
+.product-list {text-align: center}
+.recent {background-color: #ffffe0}

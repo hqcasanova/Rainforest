@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     @product = Product.find(params[id_symbol])
   end
 
+  #Outputs date_time in format similar to Sat, 6 Sep 2014 23:10
+  def formatted_datetime(date_time)
+    date_time.strftime("%e %b %Y")
+  end
+  helper_method :formatted_datetime
+
   #Sanitized version of params
   def secure_params(require_param, permit_keys)
     params.require(require_param).permit(*permit_keys)
@@ -23,12 +29,14 @@ class ApplicationController < ActionController::Base
   #TODO: Tries to guess the previous page based on the referrer and controller name
   #Still buggy
   def back_url
-    if (request.referrer != request.path)
+    if (controller_name == 'sessions') || (controller_name == 'users')
+      url = controller_name + '/new'
+    elsif (request.referrer != request.path)
       url = request.referrer
-    elsif controller_name != 'sessions'
+    elsif (controller_name != 'sessions') && (controller_name != 'users')
       url = root_path + controller_name
     else 
-      url = root_path  
+      url = root_path 
     end 
   end
   helper_method :back_url

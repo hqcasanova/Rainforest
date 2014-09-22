@@ -3,7 +3,16 @@ class ProductsController < ApplicationController
   before_filter -> { load_product(:id) }, only: [:show, :edit, :update, :destroy]    #from application_controller  
 
   def index
-    @products = Product.all
+    @products = if params[:search]
+      Product.where("LOWER(name) LIKE LOWER(?)", "%#{params[:search]}%")
+    else
+      Product.all
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
