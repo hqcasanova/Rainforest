@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
   before_filter :ensure_logged_in, only: [:create, :update, :destroy]
 
   def edit
+    @ajax = false;  #ajax disabled; edition would well be implemented in ajax in the real world.
   end
 
   def create

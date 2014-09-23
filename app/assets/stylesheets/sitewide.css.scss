@@ -42,11 +42,12 @@ header h1 a:hover {text-decoration: none}
 .userinfo a {display: block}
 .userinfo:hover {width: auto}
 .breadcrumbs {
-  display: block;
-  margin-left: .3em;
   clear: both;
+  display: block;
+  text-transform: capitalize;
 }
 .breadcrumbs a:after {content: " > "}
+.breadcrumbs, .notice {margin-left: .3em}
 section {padding: 0 .5em}
 section a, .search-box {
   display: inline-block;

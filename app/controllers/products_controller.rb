@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @ajax = true;   #ajaxified creation
     if current_user
       @review = @product.reviews.build
     end

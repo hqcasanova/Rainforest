@@ -1,5 +1,5 @@
 <%-# This way, active record can infer the value for the FK in Reviews -%> 
-<%= form_for [@product, @review], :remote => true do |f| %>    
+<%= form_for [@product, @review], :remote => @ajax do |f| %>    
   <div id="review-form-errors">   
     <%= render 'shared/form_header', :errors => @review.errors %>
   </div>
